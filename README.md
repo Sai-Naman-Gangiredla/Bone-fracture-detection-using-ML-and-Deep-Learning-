@@ -46,6 +46,9 @@ python app.py
 ```
 - Open your browser and go to [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
+- ![screenshot_upload](https://github.com/user-attachments/assets/2d325ea5-c1f9-48a4-9c1a-e447254518db)
+![screenshot_result](https://github.com/user-attachments/assets/c1f63231-c071-4713-ac86-b9c4cb752a0f)
+
 ---
 
 ## 🧠 Implementation Details
