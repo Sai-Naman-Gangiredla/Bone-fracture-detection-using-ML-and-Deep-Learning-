@@ -79,7 +79,7 @@ python app.py
 
 ---
 
-## 👨‍💻 Authors
+## 👨‍💻 Author
 
 - G. Sai Naman
 
