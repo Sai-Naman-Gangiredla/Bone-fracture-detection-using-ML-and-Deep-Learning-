@@ -108,3 +108,24 @@ This project is for educational and research purposes.
 - If you encounter issues, check your Python version and ensure all dependencies are installed.
 
 ---
+
+##  Imp note 
+
+- In this current implementation, the fracture type and details are being assigned randomly whenever the model predicts "fractured."
+
+- It is because this model is a binary classifier (it only predicts "fractured" or "not fractured"), and the code then randomly selects a fracture type from a list for demonstration purposes.
+
+- This means every time a fracture is detected, the app picks a random fracture type and shows its details.
+
+- The details (description, severity, locations) are correct for each type, but the type itself is not based on the actual image.
+
+- How to Make It Real:
+
+- If you want the app to actually classify the type of fracture (e.g., Avulsion, Spiral, etc.),
+You need to:
+Train a multi-class classification model (not just binary) using labeled data for each fracture type.
+Update your model training code in the Jupyter notebook to predict the specific fracture type.
+Update your Flask app to use the model’s predicted class directly, instead of picking randomly.
+
+---
+
