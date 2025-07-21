@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-white shadow-sm mb-4">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="/">
+          <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" style="width: 40px; margin-right: 10px;">
+          <span class="navbar-brand-text mb-0 h1">Bone Fracture Detection</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <div class="card p-4 p-md-5 text-center">
+            <h2 class="mb-4">Prediction Result</h2>
+
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+                 {% if image %}
+                    <img src="{{ url_for('static', filename=image) }}" class="img-fluid rounded-3 mt-3" alt="Uploaded Image" style="max-height: 250px; object-fit: contain;">
+                {% endif %}
+            {% elif image and prediction %}
+                <!-- Display the uploaded image -->
+                <div class="mb-4">
+                    <img src="{{ url_for('static', filename=image) }}" class="img-fluid rounded-3" alt="Uploaded X-Ray" style="max-height: 400px; object-fit: contain;">
+                </div>
+                
+                <!-- Display the main prediction -->
+                <h3>Prediction: 
+                    <span class="badge fs-5 {{ 'bg-danger' if 'fractured' in prediction.lower() else 'bg-success' }}">
+                        {{ prediction | title }}
+                    </span>
+                </h3>
+                
+                <!-- Display detailed fracture info card -->
+                {% if fracture_info %}
+                <div class="card mt-4 text-start shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h4 class="card-title mb-0">Fracture Details: {{ fracture_info.name }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <p class="mb-2"><strong>Description:</strong></p>
+                                <p class="text-muted">{{ fracture_info.description }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="mb-2"><strong>Severity:</strong></p>
+                                <p><span class="badge fs-6 {{ 'bg-danger' if fracture_info.severity == 'Severe' else 'bg-warning text-dark' if fracture_info.severity == 'Moderate' else 'bg-success' }}">
+                                    {{ fracture_info.severity }}
+                                </span></p>
+
+                                <p class="mb-2 mt-3"><strong>Common Locations:</strong></p>
+                                <p class="text-muted small">{{ fracture_info.common_locations }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Display the confidence score -->
+                {% if confidence %}
+                    <p class="text-muted mt-3 mb-0">Model Confidence: <strong>{{ confidence }}%</strong></p>
+                {% endif %}
+
+            {% else %}
+                 <div class="alert alert-warning" role="alert">
+                    Something went wrong. No prediction was made.
+                </div>
+            {% endif %}
+            
+            <!-- "Try Another" Button -->
+            <div class="mt-4">
+                <a href="/" class="btn btn-outline-primary px-4 py-2">Try another image</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-muted py-4 mt-5">
+        &copy; 2024 Bone Fracture Detection | Made by G. Sai Naman.
+    </footer>
+
+</body>
+</html>
