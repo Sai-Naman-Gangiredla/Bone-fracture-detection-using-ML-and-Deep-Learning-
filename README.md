@@ -27,7 +27,6 @@ This project is for educational and research purposes.
 
 - [Kaggle Dataset](https://www.kaggle.com/datasets/bmadushanirodrigo/fracture-multi-region-x-ray-data)
 - [Bootstrap](https://getbootstrap.com/)
-- [Flaticon](https://www.flaticon.com/) for the bone icon
 
 ---
 
